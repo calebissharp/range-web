@@ -6,6 +6,9 @@
   "author": "Kyubin Han <kyubinhan11@gmail.com>",
   "license": "Apache-2.0",
   "homepage": "https://web-range-myra-prod.pathfinder.gov.bc.ca",
+  "engines": {
+    "node": "10.x"
+  },
   "dependencies": {
     "@react-pdf/renderer": "^1.6.7",
     "@testing-library/jest-dom": "^4.2.3",
