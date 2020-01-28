@@ -22,4 +22,12 @@ jobs:
         run: |
           if [ "${{ secrets.NOW_TOKEN }}" != "" ]; then
             npx now --token ${{ secrets.NOW_TOKEN }}
+            echo ::set-env NOW_DEPLOY_URL=${xclip}
           fi
+      - name: Create deployment
+        if: success()
+        uses: actions/github@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: comment ${NOW_DEPLOY_URL}
