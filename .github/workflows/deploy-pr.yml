@@ -22,7 +22,7 @@ jobs:
         run: |
           if [ "${{ secrets.NOW_TOKEN }}" != "" ]; then
             npx now --token ${{ secrets.NOW_TOKEN }}
-            echo ::set-env NOW_DEPLOY_URL=${xclip -o}
+            echo ::set-env NOW_DEPLOY_URL="${xclip -o}"
           fi
       - name: Create deployment
         if: success()
