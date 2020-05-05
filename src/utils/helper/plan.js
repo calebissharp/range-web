@@ -197,11 +197,11 @@ export const canUserDiscardAmendment = (plan, user) => {
   if (!user || !plan) return false
 
   if (user.roles.includes(USER_ROLE.RANGE_OFFICER)) {
-    return isAmendment && isStatusStaffDraft(plan.status)
+    return isAmendment && isStatusStaffDraft(plan.status) && plan.staffInitiated
   }
 
   if (user.roles.includes(USER_ROLE.AGREEMENT_HOLDER)) {
-    return isAmendment && isStatusCreated(plan.status)
+    return isAmendment && isStatusCreated(plan.status) && !plan.staffInitiated
   }
 
   return false
