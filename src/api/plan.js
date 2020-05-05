@@ -217,7 +217,8 @@ export const createAmendment = async (
     API.UPDATE_RUP(plan.id),
     {
       ...plan,
-      amendmentTypeId: initialAmendment.id
+      amendmentTypeId: initialAmendment.id,
+      staffInitiated
     },
     getAuthHeaderConfig()
   )
