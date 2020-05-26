@@ -11,5 +11,5 @@ module.exports = {
       version: packageConfig.dependencies.react
     }
   },
-  plugins: ['jsx-a11y', 'import']
+  plugins: ['jsx-a11y', 'import', 'cypress']
 }
