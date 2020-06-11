@@ -86,6 +86,42 @@ module.exports = (on, config) => {
       )
 
       return user
+    },
+    async setupAHUser(username) {
+      const {
+        rows: [user]
+      } = await pool.query(
+        `
+      INSERT INTO user_account(given_name, family_name, username, email, pia_seen)
+      VALUES (
+        'Agreement',
+        'Holder',
+        $1,
+        $1,
+        true
+      )
+      RETURNING *`,
+        [username]
+      )
+
+      await pool.query(
+        `DELETE FROM user_client_link WHERE client_id = (SELECT id FROM ref_client WHERE name = 'Leslie Knope')`
+      )
+
+      await pool.query(
+        `
+        INSERT INTO user_client_link(user_id, client_id, type, active)
+        VALUES (
+          (SELECT id FROM user_account WHERE username = $1),
+          (SELECT id FROM ref_client WHERE name = 'Leslie Knope'),
+          'owner',
+          true
+        )
+      `,
+        [username]
+      )
+
+      return user
     }
   }),
     // modify config values
