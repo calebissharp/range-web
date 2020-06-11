@@ -1,6 +1,12 @@
 describe('Login', () => {
   beforeEach(() => {
-    cy.login('range_officer')
+    cy.logout()
+    cy.login()
+
+    const username = Cypress.env('range_officer_username')
+
+    cy.task('resetDb')
+    cy.task('setupStaffUser', username).as('staffUser')
   })
 
   it('starts a range use plan and saves + submits it', () => {
@@ -8,7 +14,7 @@ describe('Login', () => {
     cy.visit('/home')
     cy.url().should('not.include', 'login')
 
-    cy.findByPlaceholderText(/Enter RAN/g).type('RAN099931{enter}')
+    cy.findByPlaceholderText(/Enter RAN/g).type('RAN099915{enter}')
 
     // Create new plan
     cy.findByText('New plan').click()

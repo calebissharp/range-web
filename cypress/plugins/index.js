@@ -58,7 +58,9 @@ module.exports = (on, config) => {
       )
     },
     async setupStaffUser(username) {
-      await pool.query(
+      const {
+        rows: [user]
+      } = await pool.query(
         `
       INSERT INTO user_account(given_name, family_name, username, email, pia_seen)
         VALUES (
@@ -67,11 +69,12 @@ module.exports = (on, config) => {
           $1,
           $1,
           true
-        )`,
+        )
+        RETURNING *`,
         [username]
       )
 
-      return pool.query(
+      await pool.query(
         `
         UPDATE ref_zone
         SET user_id = user_account.id
@@ -81,6 +84,8 @@ module.exports = (on, config) => {
       `,
         [username]
       )
+
+      return user
     }
   }),
     // modify config values
