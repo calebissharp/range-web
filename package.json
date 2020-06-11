@@ -117,6 +117,8 @@
     "eslint-plugin-jest": "^21.27.2",
     "findup-sync": "^4.0.0",
     "husky": "^2.7.0",
+    "pg": "^8.2.1",
+    "pg-native": "^3.0.0",
     "prettier": "^1.18.2",
     "start-server-and-test": "^1.11.0"
   },
