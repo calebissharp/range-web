@@ -58,6 +58,13 @@ const headCells = [
     sortable: true
   },
   {
+    id: 'ref_zone.code',
+    numeric: false,
+    disablePadding: false,
+    label: 'Zone',
+    sortable: true
+  },
+  {
     id: 'plan_status.code',
     disablePadding: false,
     label: 'Status Code',
@@ -165,6 +172,7 @@ function PlanRow({ agreement, location, user, currentPage }) {
     { ...agreement.plans[0], agreement },
     user
   )
+  console.log(agreement)
   return (
     <>
       <TableRow className={classes.root} hover tabIndex={-1} key={agreement.id}>
@@ -196,6 +204,7 @@ function PlanRow({ agreement, location, user, currentPage }) {
             ? `${agreement?.zone?.user?.givenName} ${agreement?.zone?.user?.familyName}`
             : 'Not provided'}
         </TableCell>
+        <TableCell align="left">{agreement.zone?.code}</TableCell>
         <TableCell align="left">
           {agreement.plans[0] ? (
             agreement.plans[0]?.status.code
